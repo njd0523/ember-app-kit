@@ -1,5 +1,5 @@
 export default Ember.Route.extend({
-  model: function() {
+  model: function(params) {
     return ['red', 'yellow', 'blue'];
   }
 });
