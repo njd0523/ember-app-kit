@@ -2,3 +2,11 @@
 html, body {
     margin: 20px;
 }
+
+div.photos div{
+    height: 275px;
+}
+a.back_to_search {
+    float:right;
+    margin-top: -35px;
+}

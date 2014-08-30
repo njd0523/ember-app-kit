@@ -8,7 +8,7 @@ var NewRoute = Ember.Route.extend({
             api_key = '854f6c3ae2c026056f93eb20036ce07c',
             perms = 'read',
             query = params.queryParams.query,
-            url = base_url + 'method=flickr.photos.search&api_key=' + api_key + '&tags=' +  query.replace(' ', '+')  +'&safe_search=1&per_page=20&format=json&jsoncallback=?';
+            url = base_url + 'method=flickr.photos.search&api_key=' + api_key + '&tags=' +  query.replace(' ', '+')  +'&safe_search=1&per_page=40&format=json&jsoncallback=?';
 
         return Ember.$.getJSON(url).then(function(data) {
             var result = [], src;

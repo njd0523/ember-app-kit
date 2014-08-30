@@ -1,5 +1,7 @@
 <form {{action "search" on="submit"}}>
-    <p><label for="auth">Do user authentication:</label>{{input type="checkbox" checked=auth_me name="auth"}}</p>
-    {{view Ember.TextField valueBinding="queryField" placeholder="Search by Tag"}}
-    <input type="submit" value="Search"/>
+<div class="row">
+  <div class="col-md-9">{{view Ember.TextField valueBinding="queryField" class="form-control" placeholder="Search by Tag"}}</div>
+  <div class="col-md-1">{{input type="submit" value="Search" class="btn btn-primary"}}</div>
+  <div class="col-md-2">{{input type="checkbox" checked=auth_me name="auth"}} Do user authentication</div>
+</div>
 </form>

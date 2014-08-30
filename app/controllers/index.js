@@ -30,9 +30,32 @@ export default Ember.ArrayController.extend({
                     
                     if (res.stat === "ok") {
                         var api_sig = $.md5(secret + 'api_key' + api_key + 'formatjsonfrob' + res.frob._content + 'perms' + perms),
-                            auth_url = 'http://flickr.com/services/auth/?api_key=' + api_key + '&perms=' + perms + '&api_sig=' + api_sig + '&frob=' + res.frob._content +'&format=json';
-                        window.open(auth_url, "popupWindow", "width=600,height=600,scrollbars=yes");
-                        self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
+                            auth_url = 'http://flickr.com/services/auth/?api_key=' + api_key + '&perms=' + perms + '&api_sig=' + api_sig + '&frob=' + res.frob._content +'&format=json',
+                            obj = window.open(auth_url, "popupWindow", "width=600,height=600,scrollbars=yes");
+
+                        var time = setInterval(function () {
+                            try {
+                                if(obj.closed) obj = null;
+                            } catch (e) {
+                                clearInterval(time);
+                                api_sig = $.md5(secret + 'api_key' + api_key +'formatjsonfrob' + res.frob._content +'methodflickr.auth.getToken'),
+                                request = $.ajax({
+                                    url: basic_url + 'method=flickr.auth.getToken&api_key=' + api_key + '&api_sig=' + api_sig + '&format=json&frob=' + res.frob._content
+                                });
+                                request.complete(function( jqXHR, textStatus ) {
+                                    var res = jqXHR.responseText;
+                                        res = res.substring(res.indexOf('"') - 1, res.length - 1);
+                                        res = JSON.parse(res);
+                                    if (res.stat === "ok") {
+                                        self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
+                                    } else {
+                                        Ember.Logger.log(res.message);
+                                        self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
+                                    }
+                                });
+
+                            }
+                        }, 1000);
                     } else {
                         Ember.Logger.log(res.message);
                         return [];
