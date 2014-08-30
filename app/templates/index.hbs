@@ -1,5 +1,5 @@
-<ul>
-{{#each}}
-  <li>{{this}}</li>
-{{/each}}
-</ul>
+<form {{action "search" on="submit"}}>
+    <p><label for="auth">Do user authentication:</label>{{input type="checkbox" checked=auth_me name="auth"}}</p>
+    {{view Ember.TextField valueBinding="queryField" placeholder="Search by Tag"}}
+    <input type="submit" value="Search"/>
+</form>

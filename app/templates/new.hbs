@@ -1,6 +1,10 @@
+<a href="/">Back to search</a>
 <ul>
+{{#if this}}
 {{#each}}
-  <li>{{this}}</li>
-  <img class="result" src={{this}}>
+  <li><img class="result" src={{this}}></li>
 {{/each}}
+{{else}}
+Oops! Please back to search page.
+{{/if}}
 </ul>
