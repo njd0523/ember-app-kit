@@ -4,9 +4,8 @@ var IndexController = Ember.ArrayController.extend({
     queryField: Ember.computed.oneWay('query'),
     actions: {
         search: function () {
-            if (!this.get('queryField') && $('form .error').length === 0) {
-
-                $('form').append('<span class="error">You must have the search key word !!</span>');
+            if (!this.get('queryField') && $('form .alert').length === 0) {
+                $('form').append('<div class="alert alert-danger" role="alert"><span class="alert-link">You must have the search key word !!</span></div>');
             } else {
                 var self = this,
                     request,
@@ -49,7 +48,10 @@ var IndexController = Ember.ArrayController.extend({
                                             self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
                                         } else {
                                             Ember.Logger.log(res.message);
-                                            self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
+                                            if ($('form .alert').length > 0) { $('.alert').remove(); }
+                                            $('form').append('<div class="alert alert-danger" role="alert"><span class="alert-link">Oops! Something went wrong: ' + res.message + '</span></div>');
+                                            return [];
+                                            //self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
                                         }
                                     });
                                 }
