@@ -1,19 +1,16 @@
 {{#if this}}
 <a href="/" class="back_to_search"><span class="glyphicon glyphicon-share-alt"> Back to search<span></a>
-
 <div class="row photos">
 {{#each}}
-  <div class="col-xs-1 col-md-3">
-    <a href="#" class="thumbnail">
-      <img class="result" src={{this}}>
-    </a>
-  </div>
-
+    <div class="col-xs-1 col-md-3">
+        <a href="#" class="thumbnail">
+            <img class="result" src={{this}}>
+        </a>
+    </div>
 {{/each}}
 </div>
 {{else}}
 <div class="alert alert-danger" role="alert">
-  <span class="alert-link">Oops! Something wrong, please <a href="/">back to search page</a>.</span>
+    <span class="alert-link">Oops! Something wrong, please <a href="/">back to search page</a>.</span>
 </div>
 {{/if}}
-</ul>
