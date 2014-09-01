@@ -51,7 +51,6 @@ var IndexController = Ember.ArrayController.extend({
                                             if ($('form .alert').length > 0) { $('.alert').remove(); }
                                             $('form').append('<div class="alert alert-danger" role="alert"><span class="alert-link">Oops! Something went wrong: ' + res.message + '</span></div>');
                                             return [];
-                                            //self.transitionToRoute('new', {queryParams: { query : self.get('queryField')} });
                                         }
                                     });
                                 }
